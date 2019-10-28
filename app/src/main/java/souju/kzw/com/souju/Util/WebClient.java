@@ -14,26 +14,14 @@ import souju.kzw.com.souju.Bean.AdsScript;
  */
 
 public class WebClient extends WebViewClient {
-    private List<AdsScript> list = new ArrayList<>();
+
     private requestListener listener;
 
-    public WebClient(List<AdsScript> list) {
-        this.list = list;
-    }
+    public WebClient() { }
 
     @Override
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
-        for (AdsScript bean : list) {
-            if (url.contains(bean.getWebsite())) {
-                String js = bean.getScript();
-                view.evaluateJavascript(js, new ValueCallback<String>() {
-                    @Override
-                    public void onReceiveValue(String s) {
-                    }
-                });
-            }
-        }
         if (listener != null) {
             listener.requestResult(view.getTitle(), url);
         }

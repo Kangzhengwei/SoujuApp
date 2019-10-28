@@ -82,13 +82,12 @@ public class BrowserActivity extends AppCompatActivity implements WebClient.requ
             }
         } catch (Exception e) {
         }
-        List<AdsScript> list = GsonUtil.getInstance().fromJson(Constant.adScript, new TypeToken<List<AdsScript>>() {
-        }.getType());
-        initWebView(list);
+
+        initWebView();
     }
 
-    public void initWebView(List<AdsScript> list) {
-        webClient = new WebClient(list);
+    public void initWebView() {
+        webClient = new WebClient();
         webClient.setRequestListener(this);
         webView.setWebViewClient(webClient);
         webView.setWebChromeClient(new WebChromeClient() {
